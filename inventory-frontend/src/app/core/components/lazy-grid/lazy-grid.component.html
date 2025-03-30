@@ -1,0 +1,222 @@
+<div class="rounded-2xl p-3 shadow-md bg-white h-full" *ngIf="!instance.enableListView" id="grid">
+    <nz-table nzShowSizeChanger [nzLoadingIndicator]="loadingIndicator" [nzData]="instance.data" [nzFrontPagination]="false" [nzTotal]="instance.total" [nzTitle]="header"
+        [nzPageSize]="instance.dataQuery.pageSize" [nzPageIndex]="instance.dataQuery.pageIndex" [nzLoading]="instance.loading" (nzQueryParams)="instance.onPaginationChange($event)"
+        [nzScroll]="{ x: '800px',  y: '500px' }" [nzVirtualItemSize]="300">
+        <thead>
+            <tr>
+                <th nzWidth="60px" nzLeft>#</th>
+                <th [nzWidth]="col.width + 'px'" *ngFor="let col of instance.columns" [nzColumnKey]="col.name" [nzSortFn]="true">{{col.displayName}}</th>
+                <th nzWidth="60px" nzRight class="!text-center w-full">
+                    <span class="material-symbols-rounded">settings</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of instance.data; let i=index" (click)="onClickRow(row, i)" (contextmenu)="onRightClick($event, rightClickMenu, row, i)"
+                [class]="instance.selectedRowIndex == i ? 'selected':''">
+                <td nzLeft>{{(i + 1) + ((instance.dataQuery.pageIndex - 1) * instance.dataQuery.pageSize)}}</td>
+                <ng-container *ngFor="let col of instance.columns">
+                    <ng-container *ngIf="col.isImage">
+                        <td>
+                            <nz-avatar nzIcon="user" [nzSrc]="getImageUrl(row[col.name])"></nz-avatar>
+                        </td>
+                    </ng-container>
+                    <ng-container *ngIf="!col.isImage">
+                        <td *ngIf="!col.hidden" class="text-ellipsis text-nowrap overflow-hidden">
+                            <span [ngStyle]="getStyle(col, row)" [ngClass]="{ isLink: col.link}" (click)="col?.onClick && col?.onClick(row)">
+                                <ng-container [ngSwitch]="col.dataType">
+                                    <ng-container *ngSwitchCase="instance.DATA_TYPE.BOOLEAN">
+                                        <span [style.color]="row[col.name]?'green':'red'" class="material-symbols-rounded">{{row[col.name] ? "check_circle":"cancel"}}</span>
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="instance.DATA_TYPE.DATE || instance.DATA_TYPE.DATE">
+                                        {{row[col.name] | date}}
+                                    </ng-container>
+                                    <ng-container *ngSwitchDefault>
+                                        <span *ngIf="col.isEnum">{{row[col.name] | enumDisplay}} </span>
+                                        <span *ngIf="!col.isEnum">{{row[col.name]}}</span>
+                                    </ng-container>
+                                </ng-container>
+                            </span>
+                        </td>
+                    </ng-container>
+                </ng-container>
+                <td nzRight class="text-center">
+                    <span *ngIf="instance.rowIconAction.length == 0" class="cursor-not-allowed text-ellipsis text-nowrap text-center">-</span>
+                    <ng-container *ngIf="instance.rowIconAction.length > 0">
+                        <!-- <button nz-button nzType="default" nzTrigger="click" nzShape="round" nz-dropdown [nzDropdownMenu]="menu">
+                            <span nzTheme="outline" nz-icon nzType="ellipsis"></span>
+                        </button> -->
+
+                        <span class="material-symbols-rounded cursor-pointer border px-2 shadow-md border-red-500 rounded-full hover:text-red-500 bg-white" nzTrigger="click"
+                            nz-dropdown [nzDropdownMenu]="menu">page_control</span>
+                        <nz-dropdown-menu #menu="nzDropdownMenu">
+                            <ul nz-menu>
+                                <li nz-menu-item *ngFor="let iconAction of instance.rowIconAction" (click)="iconAction.callBack(row)"
+                                    [nzDisabled]="iconAction.disable && iconAction.disable(row)">
+                                    <span class="flex justify-start items-center">
+                                        <span class="material-symbols-rounded mx-2">{{iconAction.icon}}</span>
+                                        <span>{{iconAction.name}}</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </nz-dropdown-menu>
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+    <ng-template #loadingIndicator>
+        <div class="flex justify-center items-center flex-col mx-5 w-full h-full">
+            <span class="text-2xl" nz-icon [nzType]="'loading'"></span>
+            <span>Loading</span>
+        </div>
+    </ng-template>
+
+
+    <ng-template #header>
+        <div class="top-header">
+            <div class="heading">
+                <h2>{{instance.title}} <span *ngIf="instance.total > 0">({{instance.total}})</span></h2>
+            </div>
+            <div class="flex justify-start items-center grid-filter">
+                <div class="field">
+                    <nz-select nzId="grid-filter" class="w-56" [nzDisabled]="instance.loading" [(ngModel)]="instance.filterSelectedField" (ngModelChange)="instance.onFilterAdded()"
+                        nzShowSearch nzAllowClear nzPlaceHolder="Search">
+                        <ng-container *ngFor="let item of instance.columns">
+                            <nz-option *ngIf="!item.hideFromFilter" [nzLabel]="item.displayName" [nzValue]="item.name"></nz-option>
+                        </ng-container>
+                    </nz-select>
+                </div>
+
+                <div class="value">
+                    <div [ngSwitch]="instance.filterSelectedFieldDataType">
+                        <div *ngSwitchCase="DATA_TYPE.BOOLEAN">
+                            <nz-select [(ngModel)]="instance.filterSelectedValue" [nzDisabled]="instance.loading" (ngModelChange)="instance.onFilterChange()" class="w-56"
+                                placeholder="Search">
+                                <nz-option nzValue="true" nzLabel="Yes"></nz-option>
+                                <nz-option nzValue="false" nzLabel="No"></nz-option>
+                            </nz-select>
+                        </div>
+                        <div *ngSwitchDefault>
+                            <input nz-input class="w-56" [disabled]="instance.loading" [(ngModel)]="instance.filterSelectedValue" (ngModelChange)="instance.$InputChange.next(0)"
+                                placeholder="Search" />
+                        </div>
+                    </div>
+                </div>
+                <core-button class="ml-2 p-0" (click)="instance.onClear()">clear</core-button>
+            </div>
+            <div class="top-tools">
+                <ng-container *ngFor="let iconAction of instance.topIconAction">
+                    <ng-container *ngIf="iconAction?.isButton">
+                        <core-button (click)="iconAction.callBack()" class="mx-1">
+                            <span nz-icon [nzType]="iconAction.icon" nzTheme="outline"></span>
+                            <span class="ml-2.5">{{iconAction.display || iconAction.toolTip}}</span>
+                        </core-button>
+                    </ng-container>
+                    <ng-container *ngIf="!iconAction?.isButton">
+                        <button class="table-header-icon" (click)="iconAction.callBack()" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipPlacement="top"
+                            [nzTooltipTitle]="iconAction.toolTip">
+                            <span class="material-symbols-rounded">{{iconAction.icon}}</span>
+                        </button>
+                    </ng-container>
+                </ng-container>
+                <button class="table-header-icon" (click)="instance.toggleView()" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipPlacement="top"
+                    [nzTooltipTitle]="instance.viewToolTip">
+                    <span class="material-symbols-rounded">{{instance.viewIcon}}</span>
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>
+
+
+<div *ngIf="instance.enableListView" id="grid">
+    <nz-list class="demo-loadmore-list" [nzLoading]="instance.loading">
+        <nz-list-header>
+            <div class="top-header">
+                <div>
+                    <h2>{{instance.title}} <span *ngIf="instance.total > 0">({{instance.total}})</span></h2>
+                </div>
+                <div class="top-tools">
+                    <ng-container *ngFor="let iconAction of instance.topIconAction">
+                        <ng-container *ngIf="iconAction?.isButton">
+                            <core-button (click)="iconAction.callBack()" class="mx-1">
+                                <span class="material-symbols-rounded">{{iconAction.icon}}</span>
+                                <span class="ml-2.5">{{iconAction.display || iconAction.toolTip}}</span>
+                            </core-button>
+                        </ng-container>
+                        <ng-container *ngIf="!iconAction?.isButton">
+                            <button class="table-header-icon" (click)="iconAction.callBack()" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipPlacement="top"
+                                [nzTooltipTitle]="iconAction.toolTip">
+                                <span class="material-symbols-rounded">{{iconAction.icon}}</span>
+                            </button>
+                        </ng-container>
+                    </ng-container>
+                    <button class="table-header-icon" (click)="instance.toggleView()" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipPlacement="top"
+                        [nzTooltipTitle]="instance.viewToolTip">
+                        <span class="material-symbols-rounded">{{instance.viewIcon}}</span>
+                    </button>
+                </div>
+            </div>
+        </nz-list-header>
+        <nz-list-item *ngFor="let row of instance.data;">
+            <nz-page-header [nzGhost]="false">
+                <nz-page-header-subtitle>#{{row.id}}</nz-page-header-subtitle>
+                <nz-page-header-extra>
+                    <nz-space>
+                        <ng-container *ngFor="let iconAction of instance.rowIconAction">
+                            <button class="flex items-center" *nzSpaceItem nz-button (click)="iconAction.callBack(row)" [disabled]="iconAction.disable && iconAction.disable(row)">
+                                <span nzTheme="outline" nz-icon [nzType]="iconAction.icon"></span>
+                                <span>{{iconAction.name}}</span>
+                            </button>
+                        </ng-container>
+                    </nz-space>
+                </nz-page-header-extra>
+                <nz-page-header-content>
+                    <nz-descriptions nzSize="small" [nzColumn]="4">
+                        <nz-descriptions-item *ngFor="let col of instance.columns" [nzTitle]="col.displayName" [nzSpan]="1">
+                            <span [ngClass]="{ isLink: col.link}" (click)="col?.onClick && col?.onClick(row)">
+                                <ng-container [ngSwitch]="col.dataType">
+                                    <ng-container *ngSwitchCase="instance.DATA_TYPE.BOOLEAN">
+                                        <span nz-icon [style.color]="row[col.name]?'green':'red'" [nzType]='row[col.name]?"check-circle":"close-circle"' nzTheme="fill"></span>
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="instance.DATA_TYPE.DATE">
+                                        {{row[col.name] | date}}
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="instance.DATA_TYPE.DATETIME">
+                                        {{row[col.name] | date}}
+                                    </ng-container>
+                                    <ng-container *ngSwitchDefault>
+                                        {{row[col.name]}}
+                                    </ng-container>
+                                </ng-container>
+                            </span>
+                        </nz-descriptions-item>
+                    </nz-descriptions>
+                </nz-page-header-content>
+            </nz-page-header>
+            <nz-skeleton *ngIf="instance.loading" [nzAvatar]="true" [nzActive]="true" [nzTitle]="false" [nzLoading]="true"></nz-skeleton>
+        </nz-list-item>
+        <nz-list-footer class="footer">
+            <nz-pagination *ngIf="!this.instance.hidePagination" (nzPageIndexChange)="instance.onListViewPageIndexChange($event)"
+                (nzPageSizeChange)="instance.onListViewPageSizeChange($event)" [nzPageIndex]="instance.dataQuery.pageIndex" [nzTotal]="instance.total" nzShowSizeChanger
+                [nzPageSize]="instance.dataQuery.pageSize"></nz-pagination>
+        </nz-list-footer>
+    </nz-list>
+</div>
+
+
+<nz-dropdown-menu #rightClickMenu="nzDropdownMenu">
+    <ul nz-menu>
+        <ng-container *ngIf="instance.rightClickSelectedRow != null">
+            <li nz-menu-item *ngFor="let iconAction of instance.rowIconAction" (click)="iconAction.callBack(instance.rightClickSelectedRow)"
+                [nzDisabled]="iconAction.disable && iconAction.disable(instance.rightClickSelectedRow)">
+                <span class="flex justify-start items-center">
+                    <span class="material-symbols-rounded mx-2">{{iconAction.icon}}</span>
+                    <span>{{iconAction.name}}</span>
+                </span>
+            </li>
+        </ng-container>
+    </ul>
+</nz-dropdown-menu>

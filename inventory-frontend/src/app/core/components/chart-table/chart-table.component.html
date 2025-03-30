@@ -1,0 +1,32 @@
+<div class="bg-white p-6 rounded-xl shadow-md overflow-x-auto {{colSpan}}">
+    <div class="flex justify-between items-center mb-3">
+        <h2 class="text-lg font-semibold !mb-0">{{title}}</h2>
+        <span class="flex justify-between items-center font-bold text-gray-400 hover:text-gray-800 cursor-pointer">
+            <span>View More</span>
+            <span class="material-symbols-rounded ml-2">trending_flat</span>
+        </span>
+    </div>
+    <table class="w-full border-collapse" *ngIf="columns && columns.length > 0">
+        <thead>
+            <tr class="bg-gray-200 text-gray-700">
+                <th class="p-3 text-left" *ngFor="let item of columns">{{item.display}}</th>
+                <th *ngIf="showActions" class="p-3 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border-b" *ngFor="let item of data">
+                <td class="p-3" [style]="col.cssStyles" *ngFor="let col of columns">{{item[col.name]}}</td>
+                <td *ngIf="showActions">
+                    <div class="flex justify-start items-center">
+                        <span class="p-1 flex justify-center items-center bg-white border border-solid rounded-lg border-gray-200 hover:bg-gray-200 cursor-pointer mr-2">
+                            <span class="material-symbols-rounded text-blue-400">edit</span>
+                        </span>
+                        <span class="p-1 flex justify-center items-center bg-white border border-solid rounded-lg border-gray-200 hover:bg-gray-200 cursor-pointer mr-2">
+                            <span class="material-symbols-rounded text-red-400">delete</span>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

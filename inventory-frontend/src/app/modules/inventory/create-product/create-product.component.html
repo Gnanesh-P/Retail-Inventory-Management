@@ -1,0 +1,151 @@
+<div class="flex flex-col ml-5">
+    <h2 class="font-bold !mb-0">New Product</h2>
+    <p class="text-gray-400 font-bold">Create New Product</p>
+</div>
+
+<form nz-form [formGroup]="validateForm" class="bg-white shadow-sm rounded-lg p-6 m-5" (ngSubmit)="submitForm()">
+    <h3 class="font-bold !mb-0 flex justify-start items-center">
+        <span class="material-symbols-rounded mr-1">info</span>
+        <span>Product Information</span>
+    </h3>
+
+    <div class="grid grid-cols-2 gap-4">
+        <nz-form-item>
+            <nz-form-label nzSpan="24">Warehouse</nz-form-label>
+            <nz-form-control>
+                <nz-select ngModel="lucy" nzSize="large" nzPlaceHolder="Choose">
+                    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzSpan="24">Warehouse</nz-form-label>
+            <nz-form-control>
+                <nz-select ngModel="lucy" nzSize="large" nzPlaceHolder="Choose">
+                    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4">
+        <nz-form-item class="sm:grid-cols-3">
+            <nz-form-label nzSpan="24">
+                <core-add-new-label label="Product Name"></core-add-new-label>
+            </nz-form-label>
+            <nz-form-control>
+                <input nz-input nzSpan="24" placeholder="Enter product name" nzSize="large" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="sm:grid-cols-3">
+            <nz-form-label nzSpan="24">Slug</nz-form-label>
+            <nz-form-control>
+                <input nz-input nzSpan="24" placeholder="Enter slug" nzSize="large" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzSpan="24">
+                <core-add-new-label label="SKU"></core-add-new-label>
+            </nz-form-label>
+            <nz-form-control class="relative">
+                <input nz-input nzSpan="24" placeholder="Enter SKU" nzSize="large" />
+                <button class="absolute p-1.5 text-xs cursor-pointer right-1 bg-[#02366c] text-white top-1 rounded-md ">Generate SKU</button>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4">
+        <nz-form-item>
+            <nz-form-label nzSpan="24">
+                <core-add-new-label label="Category"></core-add-new-label>
+            </nz-form-label>
+            <nz-form-control>
+                <nz-select ngModel="lucy" nzSize="large" nzPlaceHolder="Choose">
+                    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzSpan="24">
+                <core-add-new-label label="Unit"></core-add-new-label>
+            </nz-form-label>
+            <nz-form-control>
+                <nz-select ngModel="lucy" nzSize="large" nzPlaceHolder="Choose">
+                    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzSpan="24">Selling Type</nz-form-label>
+            <nz-form-control>
+                <nz-select ngModel="lucy" nzSize="large" nzPlaceHolder="Choose">
+                    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+        <nz-form-item>
+            <nz-form-label nzSpan="24">Barcode Symbology</nz-form-label>
+            <nz-form-control>
+                <nz-select ngModel="lucy" nzSize="large" nzPlaceHolder="Choose">
+                    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                    <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzSpan="24">
+                <core-add-new-label label="Item Code"></core-add-new-label>
+            </nz-form-label>
+            <nz-form-control class="relative">
+                <input nz-input nzSpan="24" placeholder="Please Enter Item Code" nzSize="large" />
+                <button class="absolute p-1.5 text-xs cursor-pointer right-1 bg-[#02366c] text-white top-1 rounded-md ">Generate Item Code</button>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+
+
+    <div class="grid grid-cols-1 gap-4">
+        <nz-form-item>
+            <nz-form-label nzSpan="24">Description</nz-form-label>
+            <nz-form-control>
+                <nz-textarea-count [nzMaxCharacterCount]="100">
+                    <textarea rows="4" nz-input></textarea>
+                </nz-textarea-count>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+
+</form>
+
+<form nz-form [formGroup]="validateForm" class="bg-white shadow-sm rounded-lg p-6 m-5" (ngSubmit)="submitForm()">
+    <h3 class="font-bold !mb-3 flex justify-start items-center">
+        <span class="material-symbols-rounded mr-1">currency_rupee_circle</span>
+        <span>Pricing & Stack</span>
+    </h3>
+
+
+    <nz-radio-group>
+        <label nz-radio>Single Product</label>
+        <label nz-radio>Variant Product</label>
+    </nz-radio-group>
+</form>

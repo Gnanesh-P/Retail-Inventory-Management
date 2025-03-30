@@ -1,0 +1,81 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+    <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4 col-span-4 justify-between flex-wrap">
+        <div class="flex  justify-center items-center">
+            <h2 class="!mb-0 mr-1 font-bold">👋 Hi, Sujith Vaithilingam,</h2>
+            <span class="font-bold text-gray-500">Here's what is happen with you store today.</span>
+        </div>
+        <div class="border border-solid border-gray-300 px-2 cursor-pointer rounded-lg flex justify-center items-center">
+            <span class="material-symbols-rounded text-3xl mr-1">calendar_today</span>
+            <span>23/05/2023</span> - <span>28/05/2023</span>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md flex items-center justify-between space-x-4 col-span-2 md:col-span-4 lg:col-span-2">
+        <div>
+            <p class="text-gray-500 mr-1">Weekly Earning</p>
+            <p class="text-xl font-semibold !mb-0 ml-1">₹33,876</p>
+            <p class="flex justify-start items-center">
+                <span class="material-symbols-rounded text-green-400">arrow_upward_alt</span>
+                <span class="text-gray-400">increase compare to last week</span>
+            </p>
+        </div>
+        <span class="material-symbols-rounded text-green-500  text-[100px]">signal_cellular_alt</span>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4">
+        <div class="bg-amber-100  text-amber-600 p-4 flex justify-center items-center rounded-lg">
+            <span class="material-symbols-rounded text-3xl">stacked_bar_chart</span>
+        </div>
+        <div>
+            <p class="text-xl font-semibold">800</p>
+            <p class="text-gray-500">No of Total Sales</p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4">
+        <div class="bg-teal-100 text-teal-600 p-4 flex justify-center items-center rounded-lg">
+            <span class="material-symbols-rounded text-3xl">leaderboard</span>
+        </div>
+        <div>
+            <p class="text-xl font-semibold">1,000</p>
+            <p class="text-gray-500">Total Sales</p>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-6">
+    <core-chart-table title="Best Seller" [columns]="[
+            { name: 'orderId', display: 'Order Id', cssStyles: 'text-align: left;' },
+            { name: 'product', display: 'Product', cssStyles: 'text-align: left;' },
+            { name: 'price', display: 'Price', cssStyles: 'text-align: left;' },
+        ]" [data]="[
+            { orderId: '#OR12', product: 'Garlic Honey', price: '₹300', quantity: 50 },
+            { orderId: '#OR18', product: 'Ginger Honey', price: '₹370', quantity: 30 },
+            { orderId: '#OR14', product: 'Raw Honey',  price: '₹600',quantity: 20 }
+        ]" [showActions]="false">
+    </core-chart-table>
+
+    <core-chart-table title="Recent Transactions" [columns]="[
+        { name: 'productName', display: 'Product Name', cssStyles: 'text-align: left;' },
+        { name: 'manufacturedDate', display: 'Manufactured', cssStyles: 'text-align: left;' },
+        { name: 'expiryDate', display: 'Expiry Date', cssStyles: 'text-align: left;' },
+        { name: 'quantity', display: 'Quantity', cssStyles: 'text-align: left;' }
+    ]" [data]="[
+        { productName: 'Product A', expiryDate: '2023-10-01', manufacturedDate: 'Aug-2023', quantity: 50 },
+        { productName: 'Product B', expiryDate: '2023-11-15', manufacturedDate: 'Aug-2023', quantity: 30 },
+        { productName: 'Product C', expiryDate: '2023-12-20',  manufacturedDate: 'Aug-2023',quantity: 20 }
+    ]">
+    </core-chart-table>
+</div>
+
+
+<div class="flex w-full gap-6 my-6 mb-7">
+    <div class="bg-white p-6 rounded-xl shadow-md sm:w-full md:w-1/2 lg:w-2/3 ">
+        <h2 class="text-lg font-semibold mb-2">Sales & Purchase Trend</h2>
+        <div id="salesPurchaseTrends" class="w-full h-64"></div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-md sm:w-full md:w-1/2 lg:w-1/3 ">
+        <h2 class="text-lg font-semibold mb-2">Sales & Purchase Comparison</h2>
+        <div id="salesChart" class="w-full h-64"></div>
+    </div>
+</div>

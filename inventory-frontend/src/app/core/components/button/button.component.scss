@@ -1,0 +1,23 @@
+button {
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 20px;
+}
+
+button.active {
+    background: var(--primary);
+    color: white;
+
+    &:hover {
+        border-color: gray;
+        background: var(--primary);
+        color: white;
+    }
+}
+
+button:hover {
+    border-color: black;
+    color: var(--primary);
+}

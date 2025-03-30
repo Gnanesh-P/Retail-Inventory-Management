@@ -1,0 +1,4 @@
+<button type="button" nz-button nzType="default" [nzLoading]="__isLoading" class="flex justify-center items-center {{isActive ? 'active':''}}">
+    <span *ngIf="iconName" class="material-symbols-rounded mr-2">{{iconName}}</span>
+    <ng-content></ng-content>
+</button>

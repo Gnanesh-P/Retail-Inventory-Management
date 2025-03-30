@@ -1,0 +1,76 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+    <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4">
+        <div class="bg-blue-100 text-blue-600 p-4 flex justify-center items-center rounded-full">
+            <span class="material-symbols-rounded text-3xl">shopping_bag_speed</span>
+        </div>
+        <div>
+            <p class="text-xl font-semibold">₹1,234</p>
+            <p class="text-gray-500">Total Purchase Due</p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4">
+        <div class="bg-green-100 text-green-600 p-4 flex justify-center items-center rounded-full">
+            <span class="material-symbols-rounded text-3xl">account_balance</span>
+        </div>
+        <div>
+            <p class="text-xl font-semibold">₹567</p>
+            <p class="text-gray-500">Total Sales Due</p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4">
+        <div class="bg-yellow-100 text-yellow-600 p-4 flex justify-center items-center rounded-full">
+            <span class="material-symbols-rounded text-3xl">savings</span>
+        </div>
+        <div>
+            <p class="text-xl font-semibold">₹89</p>
+            <p class="text-gray-500">Total Sales Amount</p>
+        </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4">
+        <div class="bg-red-100 text-red-600 p-4 flex justify-center items-center rounded-full">
+            <span class="material-symbols-rounded text-3xl">mintmark</span>
+        </div>
+        <div>
+            <p class="text-xl font-semibold">₹12</p>
+            <p class="text-gray-500">Total Expanse Amount</p>
+        </div>
+    </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-6">
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h2 class="text-lg font-semibold mb-2">Sales & Purchase Trend</h2>
+        <div id="salesPurchaseTrends" class="w-full h-64"></div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-md">
+        <h2 class="text-lg font-semibold mb-2">Sales & Purchase Comparison</h2>
+        <div id="salesPurchaseComparison" class="w-full h-64"></div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-6">
+    <core-chart-table title="Recent Products" [columns]="[
+            { name: 'orderId', display: 'Order Id', cssStyles: 'text-align: left;' },
+            { name: 'product', display: 'Product', cssStyles: 'text-align: left;' },
+            { name: 'price', display: 'Price', cssStyles: 'text-align: left;' },
+        ]" [data]="[
+            { orderId: '#OR12', product: 'Garlic Honey', price: '₹300', quantity: 50 },
+            { orderId: '#OR18', product: 'Ginger Honey', price: '₹370', quantity: 30 },
+            { orderId: '#OR14', product: 'Raw Honey',  price: '₹600',quantity: 20 }
+        ]" [showActions]="true">
+    </core-chart-table>
+
+    <core-chart-table title="Expired Products" [columns]="[
+        { name: 'productName', display: 'Product Name', cssStyles: 'text-align: left;' },
+        { name: 'manufacturedDate', display: 'Manufactured', cssStyles: 'text-align: left;' },
+        { name: 'expiryDate', display: 'Expiry Date', cssStyles: 'text-align: left;' },
+        { name: 'quantity', display: 'Quantity', cssStyles: 'text-align: left;' }
+    ]" [data]="[
+        { productName: 'Product A', expiryDate: '2023-10-01', manufacturedDate: 'Aug-2023', quantity: 50 },
+        { productName: 'Product B', expiryDate: '2023-11-15', manufacturedDate: 'Aug-2023', quantity: 30 },
+        { productName: 'Product C', expiryDate: '2023-12-20',  manufacturedDate: 'Aug-2023',quantity: 20 }
+    ]">
+    </core-chart-table>
+</div>
