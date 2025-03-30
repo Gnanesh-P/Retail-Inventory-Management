@@ -1,0 +1,536 @@
+{
+    "info": {
+        "name": "Inventory API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Get All Brands",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{base_url}}/api/brands"
+            }
+        },
+        {
+            "name": "Get Brands By ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/brands/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "brands",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create Brands",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Sample Name\"\n                    }"
+                },
+                "url": "{{base_url}}/api/brands"
+            }
+        },
+        {
+            "name": "Update Brands",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Updated Name\"\n                    }"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/brands/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "brands",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Delete Brands",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/brands/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "brands",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Get All Categories",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{base_url}}/api/categories"
+            }
+        },
+        {
+            "name": "Get Categories By ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/categories/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "categories",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create Categories",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Sample Name\"\n                    }"
+                },
+                "url": "{{base_url}}/api/categories"
+            }
+        },
+        {
+            "name": "Update Categories",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Updated Name\"\n                    }"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/categories/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "categories",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Delete Categories",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/categories/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "categories",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Get All Stocks",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{base_url}}/api/stocks"
+            }
+        },
+        {
+            "name": "Get Stocks By ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/stocks/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "stocks",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create Stocks",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Sample Name\"\n                    }"
+                },
+                "url": "{{base_url}}/api/stocks"
+            }
+        },
+        {
+            "name": "Update Stocks",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Updated Name\"\n                    }"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/stocks/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "stocks",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Delete Stocks",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/stocks/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "stocks",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Get All Suppliers",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{base_url}}/api/suppliers"
+            }
+        },
+        {
+            "name": "Get Suppliers By ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/suppliers/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "suppliers",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create Suppliers",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Sample Name\"\n                    }"
+                },
+                "url": "{{base_url}}/api/suppliers"
+            }
+        },
+        {
+            "name": "Update Suppliers",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Updated Name\"\n                    }"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/suppliers/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "suppliers",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Delete Suppliers",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/suppliers/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "suppliers",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Get All Warehouses",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{base_url}}/api/warehouses"
+            }
+        },
+        {
+            "name": "Get Warehouses By ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/warehouses/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "warehouses",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create Warehouses",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Sample Name\"\n                    }"
+                },
+                "url": "{{base_url}}/api/warehouses"
+            }
+        },
+        {
+            "name": "Update Warehouses",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Updated Name\"\n                    }"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/warehouses/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "warehouses",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Delete Warehouses",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/warehouses/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "warehouses",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Get All Customers",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{base_url}}/api/customers"
+            }
+        },
+        {
+            "name": "Get Customers By ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/customers/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "customers",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create Customers",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Sample Name\"\n                    }"
+                },
+                "url": "{{base_url}}/api/customers"
+            }
+        },
+        {
+            "name": "Update Customers",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n                        \"name\": \"Updated Name\"\n                    }"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/customers/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "customers",
+                        ":id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Delete Customers",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/customers/:id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "customers",
+                        ":id"
+                    ]
+                }
+            }
+        }
+    ]
+}
