@@ -3,10 +3,12 @@ package com.tech.inventory.controller;
 import com.tech.inventory.entity.Product;
 import com.tech.inventory.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -43,5 +45,16 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable UUID id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/filter")
+    public Page<Product> getProducts(
+            @RequestParam Map<String, String> filters,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        return productService.getFilteredProducts(filters, sortBy, sortDirection, page, size);
     }
 }
