@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class PaymentInfo {
+public class Tax {
     private String type;
-    private String status;
+    private Integer percentage;
 }

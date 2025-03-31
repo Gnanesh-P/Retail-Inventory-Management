@@ -48,7 +48,7 @@ public class StockService {
     }
 
     public Page<Stock> getFilteredStocks(Map<String, String> filters, String sortBy, String sortDirection, int page, int size) {
-        Specification<Product> specification = FilterSpecification.filterProducts(filters);
+        Specification<Stock> specification = FilterSpecification.filterProducts(filters);
 
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);

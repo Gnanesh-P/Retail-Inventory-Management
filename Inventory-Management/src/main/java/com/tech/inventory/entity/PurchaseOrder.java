@@ -22,6 +22,7 @@ public class PurchaseOrder extends BaseEntity {
     private BigDecimal totalCosts;
     private BigDecimal discountApplied;
     private Integer discountPercentage;
+    @Embedded
     private PaymentInfo paymentInfo;
     @ManyToOne
     @JoinColumn(name = "supplier_id")

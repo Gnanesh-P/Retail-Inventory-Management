@@ -1,5 +1,6 @@
 package com.tech.inventory.entity;
 
+import com.tech.inventory.dto.Tax;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,4 +29,8 @@ public class Product extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+    private String images ; // Images
+    @Embedded
+    private Tax tax;
+    private Integer pieceCount;
 }

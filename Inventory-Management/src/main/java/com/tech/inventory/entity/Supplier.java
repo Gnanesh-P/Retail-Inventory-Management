@@ -1,10 +1,7 @@
 package com.tech.inventory.entity;
 
 import com.tech.inventory.dto.Location;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +20,7 @@ public class Supplier extends BaseEntity {
     private UUID id;
     private String name;
     private String email;
+    @Embedded
     private Location address;
     private String mobileNumber;
 }

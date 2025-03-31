@@ -44,6 +44,8 @@ public class ProductService {
             product.setPerUnitPrice(updatedProduct.getPerUnitPrice());
             product.setBrand(updatedProduct.getBrand());
             product.setCategory(updatedProduct.getCategory());
+            product.setTax(updatedProduct.getTax());
+            product.setPieceCount(updatedProduct.getPieceCount());
             return productRepository.save(product);
         }).orElseThrow(() -> new RuntimeException("Product not found"));
     }

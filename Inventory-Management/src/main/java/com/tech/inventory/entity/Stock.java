@@ -24,4 +24,7 @@ public class Stock extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
+    @OneToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 }
