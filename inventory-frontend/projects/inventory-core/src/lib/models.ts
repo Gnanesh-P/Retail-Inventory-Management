@@ -1,6 +1,7 @@
 import { FormGroup } from "@angular/forms";
 
 export class Menu {
+    tagId!: string;
     name!: string;
     path!: string;
     icon?: string;
@@ -13,6 +14,7 @@ export class Menu {
         this.children = children;
         // 
         this.show = true;
+        this.tagId = "menu-" + path.split("/").join("_")
     }
 }
 
@@ -190,7 +192,7 @@ export class DataQuery {
 }
 
 export class ApiData<T> {
-    constructor(public data: T, public total?: number) { }
+    constructor(public data: T, public totalCount?: number) { }
 }
 
 

@@ -18,7 +18,7 @@
                 <ng-container *ngFor="let col of instance.columns">
                     <ng-container *ngIf="col.isImage">
                         <td>
-                            <nz-avatar nzIcon="user" [nzSrc]="getImageUrl(row[col.name])"></nz-avatar>
+                            <nz-avatar nzIcon="user" [nzSrc]="getImageUrl(instance.rowData(row, col.name))"></nz-avatar>
                         </td>
                     </ng-container>
                     <ng-container *ngIf="!col.isImage">
@@ -26,14 +26,15 @@
                             <span [ngStyle]="getStyle(col, row)" [ngClass]="{ isLink: col.link}" (click)="col?.onClick && col?.onClick(row)">
                                 <ng-container [ngSwitch]="col.dataType">
                                     <ng-container *ngSwitchCase="instance.DATA_TYPE.BOOLEAN">
-                                        <span [style.color]="row[col.name]?'green':'red'" class="material-symbols-rounded">{{row[col.name] ? "check_circle":"cancel"}}</span>
+                                        <span [style.color]="instance.rowData(row, col.name)?'green':'red'" class="material-symbols-rounded">{{instance.rowData(row, col.name) ?
+                                            "check_circle":"cancel"}}</span>
                                     </ng-container>
                                     <ng-container *ngSwitchCase="instance.DATA_TYPE.DATE || instance.DATA_TYPE.DATE">
-                                        {{row[col.name] | date}}
+                                        {{instance.rowData(row, col.name) | date}}
                                     </ng-container>
                                     <ng-container *ngSwitchDefault>
-                                        <span *ngIf="col.isEnum">{{row[col.name] | enumDisplay}} </span>
-                                        <span *ngIf="!col.isEnum">{{row[col.name]}}</span>
+                                        <span *ngIf="col.isEnum">{{instance.rowData(row, col.name) | enumDisplay}} </span>
+                                        <span *ngIf="!col.isEnum">{{instance.rowData(row, col.name)}}</span>
                                     </ng-container>
                                 </ng-container>
                             </span>
@@ -109,10 +110,10 @@
             <div class="top-tools">
                 <ng-container *ngFor="let iconAction of instance.topIconAction">
                     <ng-container *ngIf="iconAction?.isButton">
-                        <core-button (click)="iconAction.callBack()" class="mx-1">
-                            <span nz-icon [nzType]="iconAction.icon" nzTheme="outline"></span>
-                            <span class="ml-2.5">{{iconAction.display || iconAction.toolTip}}</span>
-                        </core-button>
+                        <button class="button primary mx-1" nz-button (click)="iconAction.callBack()">
+                            <span class="material-symbols-rounded">{{iconAction.icon}}</span>
+                            <span class="ml-1">{{iconAction.display || iconAction.toolTip}}</span>
+                        </button>
                     </ng-container>
                     <ng-container *ngIf="!iconAction?.isButton">
                         <button class="table-header-icon" (click)="iconAction.callBack()" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipPlacement="top"
@@ -179,16 +180,17 @@
                             <span [ngClass]="{ isLink: col.link}" (click)="col?.onClick && col?.onClick(row)">
                                 <ng-container [ngSwitch]="col.dataType">
                                     <ng-container *ngSwitchCase="instance.DATA_TYPE.BOOLEAN">
-                                        <span nz-icon [style.color]="row[col.name]?'green':'red'" [nzType]='row[col.name]?"check-circle":"close-circle"' nzTheme="fill"></span>
+                                        <span nz-icon [style.color]="instance.rowData(row, col.name) ?'green':'red'"
+                                            [nzType]='instance.rowData(row, col.name)?"check-circle":"close-circle"' nzTheme="fill"></span>
                                     </ng-container>
                                     <ng-container *ngSwitchCase="instance.DATA_TYPE.DATE">
-                                        {{row[col.name] | date}}
+                                        {{instance.rowData(row, col.name) | date}}
                                     </ng-container>
                                     <ng-container *ngSwitchCase="instance.DATA_TYPE.DATETIME">
-                                        {{row[col.name] | date}}
+                                        {{instance.rowData(row, col.name) | date}}
                                     </ng-container>
                                     <ng-container *ngSwitchDefault>
-                                        {{row[col.name]}}
+                                        {{instance.rowData(row, col.name)}}
                                     </ng-container>
                                 </ng-container>
                             </span>

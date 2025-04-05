@@ -8,6 +8,7 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
       { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'inventory', loadChildren: () => import('../inventory/inventory.module').then(m => m.InventoryModule) },
+      { path: 'warehouse', loadChildren: () => import('../warehouse/warehouse.module').then(m => m.WarehouseModule) },
     ]
   },
 ];

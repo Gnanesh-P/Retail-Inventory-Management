@@ -1,0 +1,172 @@
+<div class="grid grid-cols-12 w-screen h-screen">
+  <aside class="bg-white h-screen col-span-2 overflow-auto flex flex-col justify-between rounded border-4">
+    <div class="flex flex-col justify-between">
+      <div class="flex justify-center items-center">
+        <h1 class="app-name mt-1">Inventory App</h1>
+      </div>
+      <ul class="pl-2">
+        <ng-container *ngFor="let item of menu">
+          <ng-container *ngIf="item.children && item.children.length > 0">
+            <li>
+              <a class="parent-menu flex items-center justify-between" [id]="item.tagId" (click)="toggleMenu(menuItem)" #menuItem>
+                <div class="flex justify-start items-center">
+                  <span class="material-symbols-rounded mr-1 pr-3 ">{{item.icon}}</span>
+                  <span>{{item.name}}</span>
+                </div>
+                <span class="material-symbols-rounded mr-1">keyboard_arrow_down</span>
+              </a>
+              <ul class="hidden transition-all">
+                <li class="" *ngFor="let child of item.children" [routerLink]="child.path" routerLinkActive="active">
+                  <a class="!pl-12 flex items-center justify-between">
+                    <div class="flex justify-start items-center">
+                      <span class="material-symbols-rounded text-xs mr-3">line_start</span>
+                      <span *ngIf="child.icon" class="material-symbols-rounded mr-1 pr-3 ">{{child.icon}}</span>
+                      <span>{{child.name}}</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="!item.children">
+            <li [routerLink]="item.path" routerLinkActive="active">
+              <a class="flex items-center justify-between">
+                <div class="flex justify-start items-center">
+                  <span class="material-symbols-rounded mr-1 pr-3 ">{{item.icon}}</span>
+                  <span>{{item.name}}</span>
+                </div>
+              </a>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+    </div>
+
+    <div class="px-5 font-bold text-[15px] mb-5 cursor-pointer flex justify-start items-center text-red-400" (click)="logout()">
+      <span class="material-symbols-rounded mr-1 pr-3 font-bold">logout</span>
+      <span>Logout</span>
+    </div>
+  </aside>
+
+  <div class="col-span-10">
+    <div class="app-header !bg-gray-100 ">
+      <span class="header-trigger flex justify-between items-center">
+        <div class="flex items-center justify-start">
+          <span class="top-icon mr-3">
+            <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
+          </span>
+          <nz-input-group [nzPrefix]="prefixTemplateUser" class="top-search-input">
+            <input type="text" class="rounded-3xl" nz-input placeholder="Search" />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <span class="material-symbols-rounded">search</span>
+          </ng-template>
+        </div>
+        <div class="flex items-center justify-end">
+
+          <nz-select ngModel="Vampps Inv Store" nzPlaceHolder="Select Store" [nzCustomTemplate]="defaultTemplate" nzSize="large" nz-icon="appstore-add" class="store-select">
+            <nz-option nzValue="Vampps Inv Store" nzLabel="Vampps Inv Store"></nz-option>
+            <nz-option nzLabel="TirnelVeli Inv Store"></nz-option>
+          </nz-select>
+
+          <ng-template #defaultTemplate let-selected>
+            <div class="flex justify-start items-center">
+              <img src="assets/img/store.png" alt="Store" width="24" height="24" class="mr-2 rounded-full">
+              <span>{{ selected.nzLabel }}</span>
+            </div>
+          </ng-template>
+          <span class="top-icon mr-3">
+            <span class="material-symbols-rounded">notifications_active</span>
+          </span>
+          <span class="top-icon mr-3">
+            <span class="material-symbols-rounded">person</span>
+          </span>
+        </div>
+      </span>
+    </div>
+    <div class="inner-content px-4 py-3 bg-gray-100">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Inventory Management</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <ng-container *ngFor="let item of menu">
+        <ng-container *ngIf="item.children && item.children.length > 0">
+          <li nz-submenu [nzTitle]="item.name" [nzIcon]="item.icon || ''">
+            <ul>
+              <li nz-menu-item nzMatchRouter *ngFor="let child of item.children">
+                <a [routerLink]="child.path">{{child.name}}</a>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!item.children">
+          <li nz-menu-item nzMatchRouter>
+            <a>{{item.name}}</a>
+          </li>
+        </ng-container>
+      </ng-container>
+    </ul>
+
+    <div class="text-gray-400 flex w-full hover:text-gray-100 justify-start items-center p-5 cursor-pointer" (click)="logout()">
+      <span class="material-symbols-rounded">logout</span>
+      <span class="ml-1">Logout</span>
+    </div>
+
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger flex justify-between items-center">
+          <div class="flex items-center justify-start">
+            <span class="top-icon mr-3">
+              <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
+            </span>
+            <nz-input-group [nzPrefix]="prefixTemplateUser" class="top-search-input">
+              <input type="text" class="rounded-3xl" nz-input placeholder="Search" />
+            </nz-input-group>
+            <ng-template #prefixTemplateUser>
+              <span class="material-symbols-rounded">search</span>
+            </ng-template>
+          </div>
+          <div class="flex items-center justify-end">
+
+            <nz-select ngModel="lucy" nzPlaceHolder="Select Store" [nzCustomTemplate]="defaultTemplate" nzSize="large" nz-icon="appstore-add" class="store-select">
+              <nz-option nzValue="jack" nzLabel="Thamparam Inv Store"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="TirnelVeli Inv Store"></nz-option>
+            </nz-select>
+
+            <ng-template #defaultTemplate let-selected>
+              <div class="flex justify-start items-center">
+                <img src="assets/img/store.png" alt="Store" width="24" height="24" class="mr-2 rounded-full">
+                <span>{{ selected.nzLabel }}</span>
+              </div>
+            </ng-template>
+            <span class="top-icon mr-3">
+              <span class="material-symbols-rounded">notifications_active</span>
+            </span>
+            <span class="top-icon mr-3">
+              <span class="material-symbols-rounded">person</span>
+            </span>
+          </div>
+        </span>
+
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout> -->

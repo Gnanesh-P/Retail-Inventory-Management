@@ -10,6 +10,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { SideMenuComponent } from './side-menu.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     NzLayoutModule,
     NzMenuModule,
     NzIconModule,
+    NzCollapseModule,
     SideMenuRoutingModule
   ],
   declarations: [SideMenuComponent]

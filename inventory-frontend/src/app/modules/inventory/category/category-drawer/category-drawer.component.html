@@ -1,0 +1,24 @@
+<nz-drawer [nzVisible]="categoryDrawer.visible" [nzTitle]="categoryDrawer.title" (nzOnClose)="categoryDrawer.close()" [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false"
+    [nzWidth]="categoryDrawer.width" [nzFooter]="footerTpl">
+    <ng-container *nzDrawerContent>
+        <form [formGroup]="form" nz-form class="p5" *ngIf="categoryDrawer.visible">
+            <div class="grid grid-cols-1 gap-4">
+                <nz-form-item>
+                    <nz-form-label nzSpan="24">Category Name</nz-form-label>
+                    <nz-form-control nzHasFeedback [nzErrorTip]="nameErrorTmpl">
+                        <input nz-input formControlName="name" nzSpan="24" placeholder="Please Enter Category Name" nzSize="large" />
+                        <ng-template #nameErrorTmpl let-control>
+                            <span *ngIf="form.get('name')?.hasError('required')">Required</span>
+                        </ng-template>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </form>
+    </ng-container>
+    <ng-template #footerTpl>
+        <div class="flex justify-end items-center">
+            <button class="button secondary mr-2" nz-button (click)="categoryDrawer.close()">Cancel</button>
+            <button class="button primary" nz-button [nzLoading]="categoryDrawer.loading" (click)="insertUpdateCategory()">Submit</button>
+        </div>
+    </ng-template>
+</nz-drawer>

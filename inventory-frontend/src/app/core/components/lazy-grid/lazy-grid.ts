@@ -153,4 +153,10 @@ export class CoreLazyGridInstance<T = any> {
     }
     rightClickSelectedRow: T;
     selectedRowIndex: number = null
+
+
+    rowData(row: T, colName: string) {
+        if (!colName.includes(".")) return row[colName];
+        else return row[colName.split(".")[0]][colName.split(".")[1]]
+    }
 }
