@@ -1,10 +1,7 @@
 package com.tech.inventory.entity;
 
 import com.tech.inventory.dto.Location;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,5 +19,6 @@ public class Warehouse extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
+    @Embedded
     private Location address;
 }
