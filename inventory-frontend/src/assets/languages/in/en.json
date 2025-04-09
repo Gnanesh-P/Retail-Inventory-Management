@@ -1,0 +1,10 @@
+{
+    "app_name": "Inventory App",
+    "admin_dashboard": "Admin Dashboard",
+    "sales_dashboard": "Sales Dashboard",
+    "inventory": "Inventory",
+    "product": "Product",
+    "create_product": "Create Product",
+    "categories": "Categories",
+    "brands": "Brands"
+}

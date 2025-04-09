@@ -2,7 +2,7 @@
   <aside class="bg-white h-screen col-span-2 overflow-auto flex flex-col justify-between rounded border-4">
     <div class="flex flex-col justify-between">
       <div class="flex justify-center items-center">
-        <h1 class="app-name mt-1">Inventory App</h1>
+        <h1 class="app-name mt-1">{{"app_name" | language }} </h1>
       </div>
       <ul class="pl-2">
         <ng-container *ngFor="let item of menu">
@@ -11,7 +11,7 @@
               <a class="parent-menu flex items-center justify-between" [id]="item.tagId" (click)="toggleMenu(menuItem)" #menuItem>
                 <div class="flex justify-start items-center">
                   <span class="material-symbols-rounded mr-1 pr-3 ">{{item.icon}}</span>
-                  <span>{{item.name}}</span>
+                  <span>{{item.name | language}}</span>
                 </div>
                 <span class="material-symbols-rounded mr-1">keyboard_arrow_down</span>
               </a>
@@ -21,7 +21,7 @@
                     <div class="flex justify-start items-center">
                       <span class="material-symbols-rounded text-xs mr-3">line_start</span>
                       <span *ngIf="child.icon" class="material-symbols-rounded mr-1 pr-3 ">{{child.icon}}</span>
-                      <span>{{child.name}}</span>
+                      <span>{{child.name | language}}</span>
                     </div>
                   </a>
                 </li>
@@ -33,7 +33,7 @@
               <a class="flex items-center justify-between">
                 <div class="flex justify-start items-center">
                   <span class="material-symbols-rounded mr-1 pr-3 ">{{item.icon}}</span>
-                  <span>{{item.name}}</span>
+                  <span>{{item.name | language}}</span>
                 </div>
               </a>
             </li>

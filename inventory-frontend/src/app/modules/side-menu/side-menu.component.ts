@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Menu } from 'projects/inventory-core/src/lib/models';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -8,52 +10,49 @@ import { Menu } from 'projects/inventory-core/src/lib/models';
 })
 export class SideMenuComponent implements OnInit {
   isCollapsed = false;
-
-  constructor() { }
-  ngOnInit() {
-
-  }
+  constructor(private route: ActivatedRoute, private language: LanguageService) { }
+  ngOnInit() { }
 
   menu: Menu[] = [
-    new Menu('Admin Dashboard', '/dashboard/admin-dashboard', 'bar_chart_4_bars'),
-    new Menu('Sales Dashboard', '/dashboard/sales-dashboard', 'bar_chart_4_bars'),
-    new Menu('Inventory', '/inventory', 'inventory', [
-      new Menu('Products', '/inventory/products'),
-      new Menu('Create Product', '/inventory/create-products'),
-      new Menu('Category', '/inventory/categories'),
-      new Menu('Brands', '/inventory/brands'),
+    new Menu(this.language, 'admin_dashboard', '/dashboard/admin-dashboard', 'bar_chart_4_bars'),
+    new Menu(this.language, 'sales_dashboard', '/dashboard/sales-dashboard', 'bar_chart_4_bars'),
+    new Menu(this.language, 'inventory', '/inventory', 'inventory', [
+      new Menu(this.language, 'product', '/inventory/products'),
+      new Menu(this.language, 'create_product', '/inventory/create-products'),
+      new Menu(this.language, 'categories', '/inventory/categories'),
+      new Menu(this.language, 'brands', '/inventory/brands'),
     ]),
-    new Menu('Warehouses', '/warehouse', 'warehouse'),
-    new Menu('Stack', '/stack', 'stacks', [
-      new Menu('Stack', '/products'),
-      new Menu('Create Stack', '/categories'),
-      new Menu('Stack Category', '/suppliers'),
+    new Menu(this.language, 'warehouses', '/warehouse', 'warehouse'),
+    new Menu(this.language, 'stock', '/stock', 'stacks', [
+      new Menu(this.language, 'stock', '/products'),
+      new Menu(this.language, 'create_stock', '/categories'),
+      new Menu(this.language, 'stock_category', '/suppliers'),
     ]),
-    new Menu('Sales', '/inventory', 'real_estate_agent', [
-      new Menu('Sales Orders', '/products'),
-      new Menu('Sales Return', '/categories'),
-      new Menu('Sales Invoice', '/suppliers'),
-      new Menu('Sales Payment', '/customers')
+    new Menu(this.language, 'sales', '/inventory', 'real_estate_agent', [
+      new Menu(this.language, 'sales_orders', '/products'),
+      new Menu(this.language, 'sales_return', '/categories'),
+      new Menu(this.language, 'sales_invoice', '/suppliers'),
+      new Menu(this.language, 'sales_payment', '/customers')
     ]),
-    new Menu('Purchases', '/inventory', 'shopping_bag_speed', [
-      new Menu('Purchase', '/products'),
-      new Menu('Purchase Order', '/categories'),
-      new Menu('Purchase Return', '/suppliers'),
+    new Menu(this.language, 'purchase', '/inventory', 'shopping_bag_speed', [
+      new Menu(this.language, 'purchase', '/products'),
+      new Menu(this.language, 'purchase_order', '/categories'),
+      new Menu(this.language, 'purchase_return', '/suppliers'),
     ]),
-    new Menu('People', '/inventory', 'group', [
-      new Menu('Customer', '/products'),
-      new Menu('Supplier', '/categories'),
-      new Menu('Stores', '/suppliers'),
-      new Menu('Warehouses', '/suppliers'),
+    new Menu(this.language, 'people', '/inventory', 'group', [
+      new Menu(this.language, 'customers', '/products'),
+      new Menu(this.language, 'suppliers', '/categories'),
+      new Menu(this.language, 'stores', '/suppliers'),
+      new Menu(this.language, 'warehouses', '/suppliers'),
     ]),
-    new Menu('Reports', '/inventory', 'lab_profile', [
-      new Menu('Sales Report', '/products'),
-      new Menu('Purchase Report', '/categories'),
-      new Menu('Supplier Report', '/suppliers'),
-      new Menu('Customer Report', '/suppliers'),
+    new Menu(this.language, 'reports', '/inventory', 'lab_profile', [
+      new Menu(this.language, 'sales_report', '/products'),
+      new Menu(this.language, 'purchase_report', '/categories'),
+      new Menu(this.language, 'supplier_report', '/suppliers'),
+      new Menu(this.language, 'customer_report', '/suppliers'),
     ]),
-    new Menu('Settings', '/inventory', 'tune', [
-      new Menu('Profile', '/products'),
+    new Menu(this.language, 'settings', '/inventory', 'tune', [
+      new Menu(this.language, 'profile', '/products'),
     ])
   ]
 
@@ -78,9 +77,10 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    if (location.pathname.split("/").filter(x => x).length <= 1)
+    console.log(location.pathname.split("/").filter(x => x));
+    if (location.pathname.split("/").filter(x => x).length <= 2)
       return;
-    var parentMenu = location.pathname.split("/").filter(x => x)[0];
+    var parentMenu = location.pathname.split("/").filter(x => x)[2];
     var item = this.menu.find(y => y.tagId == ("menu-" + ("/" + parentMenu).split("/").join("_")));
     if (item) {
       this.toggleMenu(document.getElementById(item.tagId) as HTMLAnchorElement);

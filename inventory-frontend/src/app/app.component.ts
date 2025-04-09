@@ -9,9 +9,11 @@ import { hasValues, Menu } from 'projects/inventory-core/src/lib/models';
 export class AppComponent {
   constructor(private router: Router) { }
   ngOnInit() {
+
+    console.log('App component initialized');
     let token = localStorage.getItem("token")
     if (!hasValues(token)) {
-      this.router.navigate(["home"])
+      this.router.navigate(["in/ta/home"])
     }
   }
 }

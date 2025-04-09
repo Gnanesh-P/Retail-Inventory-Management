@@ -11,6 +11,7 @@ import { SideMenuComponent } from './side-menu.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { LanguageModule } from '../language/language.module';
 
 @NgModule({
   imports: [

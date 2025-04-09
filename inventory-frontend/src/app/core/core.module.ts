@@ -21,6 +21,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { EnumDisplayPipe } from './pipes/enum-display.pipe';
 import { AddNewLabelComponent } from './components/add-new-label.component';
+import { LanguagePipe } from './pipes/language.pipe';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { AddNewLabelComponent } from './components/add-new-label.component';
     GridLazyComponent,
     ButtonComponent,
     EnumDisplayPipe,
+    LanguagePipe,
     AddNewLabelComponent
   ],
   exports: [
@@ -54,6 +56,7 @@ import { AddNewLabelComponent } from './components/add-new-label.component';
     EnumDisplayPipe,
     GridLazyComponent,
     ButtonComponent,
+    LanguagePipe,
     AddNewLabelComponent
   ]
 })

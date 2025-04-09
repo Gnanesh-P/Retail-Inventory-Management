@@ -1,18 +1,19 @@
 import { FormGroup } from "@angular/forms";
+import { LanguageService } from "src/app/services/language.service";
 
 export class Menu {
+    language!: LanguageService
     tagId!: string;
     name!: string;
     path!: string;
     icon?: string;
     show!: boolean;
     children?: Menu[];
-    constructor(name: string, path: string, icon?: string, children?: Menu[]) {
+    constructor(language: LanguageService, name: string, path: string, icon?: string, children?: Menu[]) {
         this.icon = icon;
         this.name = name;
-        this.path = path;
+        this.path = `/${language.country}/${language.language}` + path;
         this.children = children;
-        // 
         this.show = true;
         this.tagId = "menu-" + path.split("/").join("_")
     }
