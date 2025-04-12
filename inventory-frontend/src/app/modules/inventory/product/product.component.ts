@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Drawer } from 'projects/inventory-core/src/lib/drawer';
 import { Product } from 'projects/inventory-core/src/lib/inventory-models';
-import { ApiData, CoreGridColumn, DATA_TYPE, DataQuery, hasValues } from 'projects/inventory-core/src/lib/models';
+import { ApiData, CoreGridColumn, DATA_TYPE, DataQuery, hasValues, Language } from 'projects/inventory-core/src/lib/models';
 import { CoreLazyGridInstance } from 'src/app/core/components/lazy-grid/lazy-grid';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -60,24 +60,24 @@ export class ProductComponent implements OnInit {
 
   drawer: Drawer = null
   grid = new CoreLazyGridInstance<Product>({
-    title: "Products",
+    title: "products",
     checkBox: true,
     columns: [
-      new CoreGridColumn({ name: "name", displayName: "Product", dataType: DATA_TYPE.STRING }),
+      new CoreGridColumn({ name: "name", displayName: "product", dataType: DATA_TYPE.STRING }),
       new CoreGridColumn({ name: "sku", displayName: "SKU", dataType: DATA_TYPE.STRING }),
-      new CoreGridColumn({ name: "pieceCount", displayName: "Item Count", dataType: DATA_TYPE.NUMBER }),
-      new CoreGridColumn({ name: "perUnitPrice", displayName: "Unit Price", dataType: DATA_TYPE.NUMBER }),
-      new CoreGridColumn({ name: "brand.name", displayName: "Brand", dataType: DATA_TYPE.STRING }),
-      new CoreGridColumn({ name: "category.name", displayName: "Category", dataType: DATA_TYPE.STRING }),
-      new CoreGridColumn({ name: "tax.percentage", displayName: "Tax Percentage", dataType: DATA_TYPE.NUMBER }),
+      new CoreGridColumn({ name: "pieceCount", displayName: "item_count", dataType: DATA_TYPE.NUMBER }),
+      new CoreGridColumn({ name: "perUnitPrice", displayName: "unit_price", dataType: DATA_TYPE.NUMBER }),
+      new CoreGridColumn({ name: "brand.name", displayName: "brand", dataType: DATA_TYPE.STRING }),
+      new CoreGridColumn({ name: "category.name", displayName: "category", dataType: DATA_TYPE.STRING }),
+      new CoreGridColumn({ name: "tax.percentage", displayName: "tax_percentage", dataType: DATA_TYPE.NUMBER }),
     ],
     topIconAction: [
-      { icon: "add_circle", toolTip: "Add New", callBack: () => { this.drawer.open("Add New Product"); this.drawer.width = "calc(100vw - 15px)" }, isButton: true },
-      { icon: "delete_forever", toolTip: "Delete", callBack: this.onDelete.bind(this) as any, isButton: true }
+      { icon: "add_circle", toolTip: "add_new", callBack: () => { this.drawer.open("add_new_product"); this.drawer.width = "calc(100vw - 15px)" }, isButton: true },
+      { icon: "delete_forever", toolTip: "delete", callBack: this.onDelete.bind(this) as any, isButton: true }
     ],
     rowIconAction: [
-      { icon: "edit", name: "Edit", callBack: (item: Product) => { this.drawer.open("Edit Product", item) } },
-      { icon: "delete_forever", name: "Delete", callBack: this.onDelete.bind(this) },
+      { icon: "edit", name: "edit", callBack: (item: Product) => { this.drawer.open("edit_product", item) } },
+      { icon: "delete_forever", name: "delete", callBack: this.onDelete.bind(this) },
     ]
   })
 

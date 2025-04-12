@@ -9,6 +9,6 @@ import { LanguageService } from 'src/app/services/language.service';
 export class LanguagePipe implements PipeTransform {
   constructor(private language: LanguageService) { }
   transform(input: string): string {
-    return this.language.data[input] || enumToNormalWord(input);
+    return this.language.transform(input)
   }
 }

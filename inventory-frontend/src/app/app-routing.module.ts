@@ -7,8 +7,7 @@ const routes: Routes = [
     children: [
       { path: '', loadChildren: () => import('./modules/language/language.module').then(m => m.LanguageModule) },
     ]
-  },
-  { path: '', redirectTo: 'in/en', pathMatch: 'full' },
+  }
 ];
 
 @NgModule({

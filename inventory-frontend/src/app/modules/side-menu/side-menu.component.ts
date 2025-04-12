@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Drawer } from 'projects/inventory-core/src/lib/drawer';
 import { Menu } from 'projects/inventory-core/src/lib/models';
 import { LanguageService } from 'src/app/services/language.service';
 
@@ -10,10 +11,11 @@ import { LanguageService } from 'src/app/services/language.service';
 })
 export class SideMenuComponent implements OnInit {
   isCollapsed = false;
-  constructor(private route: ActivatedRoute, private language: LanguageService) { }
+  constructor(private route: ActivatedRoute, public language: LanguageService) { }
   ngOnInit() { }
-
-  menu: Menu[] = [
+  notificationDrawer: Drawer
+  profileDrawer: Drawer
+  sideMenu: Menu[] = [
     new Menu(this.language, 'admin_dashboard', '/dashboard/admin-dashboard', 'bar_chart_4_bars'),
     new Menu(this.language, 'sales_dashboard', '/dashboard/sales-dashboard', 'bar_chart_4_bars'),
     new Menu(this.language, 'inventory', '/inventory', 'inventory', [
@@ -24,7 +26,7 @@ export class SideMenuComponent implements OnInit {
     ]),
     new Menu(this.language, 'warehouses', '/warehouse', 'warehouse'),
     new Menu(this.language, 'stock', '/stock', 'stacks', [
-      new Menu(this.language, 'stock', '/products'),
+      new Menu(this.language, 'stock', '/stock/stocks'),
       new Menu(this.language, 'create_stock', '/categories'),
       new Menu(this.language, 'stock_category', '/suppliers'),
     ]),
@@ -81,7 +83,7 @@ export class SideMenuComponent implements OnInit {
     if (location.pathname.split("/").filter(x => x).length <= 2)
       return;
     var parentMenu = location.pathname.split("/").filter(x => x)[2];
-    var item = this.menu.find(y => y.tagId == ("menu-" + ("/" + parentMenu).split("/").join("_")));
+    var item = this.sideMenu.find(y => y.tagId == ("menu-" + ("/" + parentMenu).split("/").join("_")));
     if (item) {
       this.toggleMenu(document.getElementById(item.tagId) as HTMLAnchorElement);
     }

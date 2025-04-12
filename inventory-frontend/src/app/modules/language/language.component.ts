@@ -10,11 +10,10 @@ export class LanguageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private language: LanguageService) { }
   isLanguageLoaded = false;
   ngOnInit() {
-    console.log('Language component initialized');
     this.route.params.subscribe(params => {
-      this.language.country = params['country'] || 'in';
-      this.language.language = params['lang'] || 'en';
-      this.language.getAllLanguage().subscribe((res) => {
+      this.language.selectedCountry = params['country'] || 'in';
+      this.language.selectedLanguage = params['lang'] || 'en';
+      this.language.loadLanguage().subscribe((res) => {
         this.isLanguageLoaded = true;
       })
     })

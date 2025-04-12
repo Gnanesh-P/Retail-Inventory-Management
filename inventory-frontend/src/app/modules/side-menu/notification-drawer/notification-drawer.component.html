@@ -1,0 +1,15 @@
+<nz-drawer [nzVisible]="notificationDrawer.visible" [nzTitle]="notificationDrawer.title" (nzOnClose)="notificationDrawer.close()" [nzBodyStyle]="{ overflow: 'auto' }"
+    [nzMaskClosable]="false" [nzWidth]="notificationDrawer.width" [nzFooter]="null" nzWrapClassName="notification-drawer">
+    <ng-container *nzDrawerContent>
+        <div class="p-2 bg-gray-100 h-full w-full">
+            <div class="m-2" *ngFor="let item of notifications">
+                <div class="bg-white shadow-sm rounded-xl border border-gray-800 p-4 relative">
+                    <span class="material-symbols-rounded absolute top-2 right-2 text-gray-400 hover:text-gray-600 cursor-default">close</span>
+                    <h3 class="text-lg font-semibold text-gray-800">{{item.title}}</h3>
+                    <p class="text-sm text-gray-600 mt-1">{{item.description}}</p>
+                </div>
+            </div>
+        </div>
+
+    </ng-container>
+</nz-drawer>

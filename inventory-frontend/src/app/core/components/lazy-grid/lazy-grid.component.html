@@ -5,7 +5,7 @@
         <thead>
             <tr>
                 <th nzWidth="60px" nzLeft>#</th>
-                <th [nzWidth]="col.width + 'px'" *ngFor="let col of instance.columns" [nzColumnKey]="col.name" [nzSortFn]="true">{{col.displayName}}</th>
+                <th [nzWidth]="col.width + 'px'" *ngFor="let col of instance.columns" [nzColumnKey]="col.name" [nzSortFn]="true">{{col.displayName | language}}</th>
                 <th nzWidth="60px" nzRight class="!text-center w-full">
                     <span class="material-symbols-rounded">settings</span>
                 </th>
@@ -51,12 +51,12 @@
                         <span class="material-symbols-rounded cursor-pointer border px-2 shadow-md border-red-500 rounded-full hover:text-red-500 bg-white" nzTrigger="click"
                             nz-dropdown [nzDropdownMenu]="menu">page_control</span>
                         <nz-dropdown-menu #menu="nzDropdownMenu">
-                            <ul nz-menu>
+                            <ul nz-menu class="w-60">
                                 <li nz-menu-item *ngFor="let iconAction of instance.rowIconAction" (click)="iconAction.callBack(row)"
-                                    [nzDisabled]="iconAction.disable && iconAction.disable(row)">
+                                    [nzDisabled]="iconAction.disable && iconAction.disable(row)" class="drop-down-menu-item">
                                     <span class="flex justify-start items-center">
                                         <span class="material-symbols-rounded mx-2">{{iconAction.icon}}</span>
-                                        <span>{{iconAction.name}}</span>
+                                        <span>{{iconAction.name | language}}</span>
                                     </span>
                                 </li>
                             </ul>
@@ -78,14 +78,14 @@
     <ng-template #header>
         <div class="top-header">
             <div class="heading">
-                <h2>{{instance.title}} <span *ngIf="instance.total > 0">({{instance.total}})</span></h2>
+                <h2>{{instance.title | language}} <span *ngIf="instance.total > 0">({{instance.total}})</span></h2>
             </div>
             <div class="flex justify-start items-center grid-filter">
                 <div class="field">
                     <nz-select nzId="grid-filter" class="w-56" [nzDisabled]="instance.loading" [(ngModel)]="instance.filterSelectedField" (ngModelChange)="instance.onFilterAdded()"
                         nzShowSearch nzAllowClear nzPlaceHolder="Search">
                         <ng-container *ngFor="let item of instance.columns">
-                            <nz-option *ngIf="!item.hideFromFilter" [nzLabel]="item.displayName" [nzValue]="item.name"></nz-option>
+                            <nz-option *ngIf="!item.hideFromFilter" [nzLabel]="item.displayName | language" [nzValue]="item.name"></nz-option>
                         </ng-container>
                     </nz-select>
                 </div>
@@ -105,25 +105,25 @@
                         </div>
                     </div>
                 </div>
-                <core-button class="ml-2 p-0" (click)="instance.onClear()">clear</core-button>
+                <core-button class="ml-2 p-0" (click)="instance.onClear()">{{'clear' | language}}</core-button>
             </div>
             <div class="top-tools">
                 <ng-container *ngFor="let iconAction of instance.topIconAction">
                     <ng-container *ngIf="iconAction?.isButton">
                         <button class="button primary mx-1" nz-button (click)="iconAction.callBack()">
                             <span class="material-symbols-rounded">{{iconAction.icon}}</span>
-                            <span class="ml-1">{{iconAction.display || iconAction.toolTip}}</span>
+                            <span class="ml-1">{{(iconAction.display || iconAction.toolTip) | language}}</span>
                         </button>
                     </ng-container>
                     <ng-container *ngIf="!iconAction?.isButton">
                         <button class="table-header-icon" (click)="iconAction.callBack()" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipPlacement="top"
-                            [nzTooltipTitle]="iconAction.toolTip">
+                            [nzTooltipTitle]="iconAction.toolTip | language">
                             <span class="material-symbols-rounded">{{iconAction.icon}}</span>
                         </button>
                     </ng-container>
                 </ng-container>
                 <button class="table-header-icon" (click)="instance.toggleView()" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipPlacement="top"
-                    [nzTooltipTitle]="instance.viewToolTip">
+                    [nzTooltipTitle]="instance.viewToolTip | language">
                     <span class="material-symbols-rounded">{{instance.viewIcon}}</span>
                 </button>
             </div>
@@ -137,14 +137,14 @@
         <nz-list-header>
             <div class="top-header">
                 <div>
-                    <h2>{{instance.title}} <span *ngIf="instance.total > 0">({{instance.total}})</span></h2>
+                    <h2>{{instance.title | language}} <span *ngIf="instance.total > 0">({{instance.total}})</span></h2>
                 </div>
                 <div class="top-tools">
                     <ng-container *ngFor="let iconAction of instance.topIconAction">
                         <ng-container *ngIf="iconAction?.isButton">
                             <core-button (click)="iconAction.callBack()" class="mx-1">
                                 <span class="material-symbols-rounded">{{iconAction.icon}}</span>
-                                <span class="ml-2.5">{{iconAction.display || iconAction.toolTip}}</span>
+                                <span class="ml-2.5">{{(iconAction.display || iconAction.toolTip) | language}}</span>
                             </core-button>
                         </ng-container>
                         <ng-container *ngIf="!iconAction?.isButton">
@@ -155,7 +155,7 @@
                         </ng-container>
                     </ng-container>
                     <button class="table-header-icon" (click)="instance.toggleView()" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipPlacement="top"
-                        [nzTooltipTitle]="instance.viewToolTip">
+                        [nzTooltipTitle]="instance.viewToolTip | language">
                         <span class="material-symbols-rounded">{{instance.viewIcon}}</span>
                     </button>
                 </div>
@@ -169,14 +169,14 @@
                         <ng-container *ngFor="let iconAction of instance.rowIconAction">
                             <button class="flex items-center" *nzSpaceItem nz-button (click)="iconAction.callBack(row)" [disabled]="iconAction.disable && iconAction.disable(row)">
                                 <span nzTheme="outline" nz-icon [nzType]="iconAction.icon"></span>
-                                <span>{{iconAction.name}}</span>
+                                <span>{{iconAction.name | language}}</span>
                             </button>
                         </ng-container>
                     </nz-space>
                 </nz-page-header-extra>
                 <nz-page-header-content>
                     <nz-descriptions nzSize="small" [nzColumn]="4">
-                        <nz-descriptions-item *ngFor="let col of instance.columns" [nzTitle]="col.displayName" [nzSpan]="1">
+                        <nz-descriptions-item *ngFor="let col of instance.columns" [nzTitle]="col.displayName | language" [nzSpan]="1">
                             <span [ngClass]="{ isLink: col.link}" (click)="col?.onClick && col?.onClick(row)">
                                 <ng-container [ngSwitch]="col.dataType">
                                     <ng-container *ngSwitchCase="instance.DATA_TYPE.BOOLEAN">
@@ -210,13 +210,13 @@
 
 
 <nz-dropdown-menu #rightClickMenu="nzDropdownMenu">
-    <ul nz-menu>
+    <ul nz-menu class="w-60">
         <ng-container *ngIf="instance.rightClickSelectedRow != null">
             <li nz-menu-item *ngFor="let iconAction of instance.rowIconAction" (click)="iconAction.callBack(instance.rightClickSelectedRow)"
-                [nzDisabled]="iconAction.disable && iconAction.disable(instance.rightClickSelectedRow)">
+                [nzDisabled]="iconAction.disable && iconAction.disable(instance.rightClickSelectedRow)" class="drop-down-menu-item">
                 <span class="flex justify-start items-center">
                     <span class="material-symbols-rounded mx-2">{{iconAction.icon}}</span>
-                    <span>{{iconAction.name}}</span>
+                    <span>{{iconAction.name | language}}</span>
                 </span>
             </li>
         </ng-container>

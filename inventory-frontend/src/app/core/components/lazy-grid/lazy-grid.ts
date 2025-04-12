@@ -113,11 +113,11 @@ export class CoreLazyGridInstance<T = any> {
 
     viewIcon = 'list'
     enableListView = false;
-    viewToolTip = "Enable Card List View"
+    viewToolTip = "enable_card_list_view"
     toggleView() {
         this.enableListView = !this.enableListView;
         this.viewIcon = this.enableListView ? "table" : "list"
-        this.viewToolTip = this.enableListView ? "Enable Table View" : "Enable Card List View"
+        this.viewToolTip = this.enableListView ? "enable_table_view" : "enable_card_list_view"
         if (this.hasInitialData)
             this.onQueryChange.next(this.dataQuery);
     }

@@ -12,7 +12,7 @@ export class Menu {
     constructor(language: LanguageService, name: string, path: string, icon?: string, children?: Menu[]) {
         this.icon = icon;
         this.name = name;
-        this.path = `/${language.country}/${language.language}` + path;
+        this.path = `/${language.selectedCountry}/${language.selectedLanguage}` + path;
         this.children = children;
         this.show = true;
         this.tagId = "menu-" + path.split("/").join("_")
@@ -366,4 +366,13 @@ export function nameClassCase(str: string) {
 export function nameCamelCase(str: string) {
     str = String(str).replace(/^_+/, '');
     return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
+export interface Language {
+    name: string,
+    language: string,
+    country: string,
+    flag?: string,
+    icon?: string,
+    isRTL?: boolean
 }

@@ -82,11 +82,18 @@ nz-content {
 .top-icon {
   background: #ffffff;
   padding: 10px;
-  border: 1px solid #e0e0e0;
+  border: 2px solid #e0e0e0;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  transition: all 0.2s;
+
+  &:hover {
+    border-width: 2px;
+    color: var(--app-main-color);
+    border-color: var(--app-main-color);
+  }
 }
 
 .top-search-input {

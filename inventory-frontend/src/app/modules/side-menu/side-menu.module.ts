@@ -11,7 +11,11 @@ import { SideMenuComponent } from './side-menu.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
-import { LanguageModule } from '../language/language.module';
+import { NotificationDrawerComponent } from './notification-drawer/notification-drawer.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ProfileDrawerComponent } from './profile-drawer/profile-drawer.component';
 
 @NgModule({
   imports: [
@@ -26,8 +30,15 @@ import { LanguageModule } from '../language/language.module';
     NzMenuModule,
     NzIconModule,
     NzCollapseModule,
+    NzDrawerModule,
+    NzFormModule,
+    NzDropDownModule,
     SideMenuRoutingModule
   ],
-  declarations: [SideMenuComponent]
+  declarations: [
+    SideMenuComponent,
+    NotificationDrawerComponent,
+    ProfileDrawerComponent
+  ]
 })
 export class SideMenuModule { }

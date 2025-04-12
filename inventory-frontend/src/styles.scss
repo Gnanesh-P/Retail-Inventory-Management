@@ -3,7 +3,7 @@
 
 
 :root {
-    --app-main-color: #08af08;
+    --app-main-color: #22c55e;
     --app-light-color: #86ff8669;
     --app-extra-light-color: #c7ffc638;
 }
@@ -137,4 +137,21 @@ body {
 
 .product-drawer .ant-drawer-body {
     padding: 0;
+}
+
+
+
+.notification-drawer .ant-drawer-body {
+    padding: 0;
+}
+
+.selected-language {
+    color: var(--app-main-color);
+    background-color: var(--app-light-color);
+}
+
+.drop-down-menu-item:hover {
+    color: var(--app-main-color);
+    cursor: pointer !important;
+    transition: all 0.2s;
 }
