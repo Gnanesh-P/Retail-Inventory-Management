@@ -1,11 +1,15 @@
 package com.tech.inventory.controller;
 
+import com.tech.inventory.entity.Supplier;
 import com.tech.inventory.entity.Warehouse;
 import com.tech.inventory.service.WarehouseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -15,8 +19,12 @@ public class WarehouseController {
     private final WarehouseService warehouseService;
 
     @GetMapping
-    public List<Warehouse> getAllWarehouses() {
-        return warehouseService.getAllWarehouses();
+    public ResponseEntity getAllWarehouses(@RequestParam(defaultValue = "0") Integer pageNumber, @RequestParam(defaultValue = "50") Integer size) {
+        Page<Warehouse> warehouses = warehouseService.getAllWarehouses(pageNumber, size);
+        Map<String, Object> response = new HashMap<>();
+        response.put("data", warehouses.getContent());  // Products list
+        response.put("totalCount", warehouses.getTotalElements());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")

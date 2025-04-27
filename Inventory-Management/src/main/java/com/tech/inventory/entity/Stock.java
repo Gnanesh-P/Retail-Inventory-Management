@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Stock extends BaseEntity {
+public class Stock extends BaseDealerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

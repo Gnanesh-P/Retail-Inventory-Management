@@ -3,9 +3,12 @@ package com.tech.inventory.controller;
 import com.tech.inventory.entity.Supplier;
 import com.tech.inventory.service.SupplierService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -15,8 +18,12 @@ public class SupplierController {
     private final SupplierService supplierService;
 
     @GetMapping
-    public List<Supplier> getAllSuppliers() {
-        return supplierService.getAllSuppliers();
+    public ResponseEntity getAllSuppliers(@RequestParam(defaultValue = "0") Integer pageNumber, @RequestParam(defaultValue = "50") Integer size) {
+        Page<Supplier> supplierPage = supplierService.getAllSuppliers(pageNumber, size);
+        Map<String, Object> response = new HashMap<>();
+        response.put("data", supplierPage.getContent());  // Products list
+        response.put("totalCount", supplierPage.getTotalElements());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")

@@ -3,10 +3,12 @@ package com.tech.inventory.controller;
 import com.tech.inventory.entity.Brand;
 import com.tech.inventory.service.BrandService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,11 +16,16 @@ import java.util.UUID;
 @RequestMapping("/api/brands")
 @RequiredArgsConstructor
 public class BrandController {
+
     private final BrandService brandService;
 
     @GetMapping
-    public List<Brand> getAllBrands() {
-        return brandService.getAllBrands();
+    public ResponseEntity<Map<String, Object>> getAllBrands(@RequestParam(defaultValue = "0") Integer pageNumber, @RequestParam(defaultValue = "50") Integer size) {
+        Page<Brand> brands = brandService.getAllBrands(pageNumber, size);
+        Map<String, Object> response = new HashMap<>();
+        response.put("data", brands.getContent());  // Products list
+        response.put("totalCount", brands.getTotalElements());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
