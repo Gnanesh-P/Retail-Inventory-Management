@@ -18,7 +18,7 @@
                 <ng-container *ngFor="let col of instance.columns">
                     <ng-container *ngIf="col.isImage">
                         <td>
-                            <nz-avatar nzIcon="user" [nzSrc]="getImageUrl(row[col.name])"></nz-avatar>
+                            <nz-avatar nzIcon="userDetails" [nzSrc]="getImageUrl(row[col.name])"></nz-avatar>
                         </td>
                     </ng-container>
                     <ng-container *ngIf="!col.isImage">
