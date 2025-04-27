@@ -1,18 +1,21 @@
 import { FormGroup } from "@angular/forms";
+import { LanguageService } from "src/app/services/language.service";
 
 export class Menu {
+    language!: LanguageService
+    tagId!: string;
     name!: string;
     path!: string;
     icon?: string;
     show!: boolean;
     children?: Menu[];
-    constructor(name: string, path: string, icon?: string, children?: Menu[]) {
+    constructor(language: LanguageService, name: string, path: string, icon?: string, children?: Menu[]) {
         this.icon = icon;
         this.name = name;
-        this.path = path;
+        this.path = `/${language.selectedCountry}/${language.selectedLanguage}` + path;
         this.children = children;
-        // 
         this.show = true;
+        this.tagId = "menu-" + path.split("/").join("_")
     }
 }
 
@@ -190,7 +193,7 @@ export class DataQuery {
 }
 
 export class ApiData<T> {
-    constructor(public data: T, public total?: number) { }
+    constructor(public data: T, public totalCount?: number) { }
 }
 
 
@@ -363,4 +366,13 @@ export function nameClassCase(str: string) {
 export function nameCamelCase(str: string) {
     str = String(str).replace(/^_+/, '');
     return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
+export interface Language {
+    name: string,
+    language: string,
+    country: string,
+    flag?: string,
+    icon?: string,
+    isRTL?: boolean
 }

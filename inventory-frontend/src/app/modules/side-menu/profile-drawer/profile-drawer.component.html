@@ -1,0 +1,33 @@
+<nz-drawer [nzVisible]="profileDrawer.visible" [nzTitle]="profileDrawer.title" (nzOnClose)="profileDrawer.close()" [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false"
+    [nzWidth]="profileDrawer.width" [nzFooter]="null" nzWrapClassName="notification-drawer">
+    <ng-container *nzDrawerContent>
+
+        <div class="flex items-center p-6">
+            <img class="w-16 h-16 rounded-full border-2 border-blue-500"
+                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+                alt="User Avatar">
+            <div class="ml-4">
+                <h2 class="text-xl font-semibold text-gray-800">Sujith Vaithilingam</h2>
+                <p class="text-sm text-gray-500">sujithvaithilingam gmail.com</p>
+                <p class="text-sm text-blue-500 font-medium">Role: Admin</p>
+            </div>
+        </div>
+
+        <div class="px-6 pb-4">
+            <h3 class="text-sm font-semibold text-gray-600 mb-2">Login History</h3>
+            <ul class="text-sm text-gray-500 space-y-1 max-h-24 overflow-y-auto">
+                <li>2025-04-12 08:23 AM</li>
+                <li>2025-04-11 10:45 PM</li>
+                <li>2025-04-10 03:14 PM</li>
+                <li>2025-04-09 06:30 AM</li>
+            </ul>
+        </div>
+
+        <div class="border-t px-6 py-4 text-right">
+            <button class="bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition duration-300">
+                Logout
+            </button>
+        </div>
+
+    </ng-container>
+</nz-drawer>

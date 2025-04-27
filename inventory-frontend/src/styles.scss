@@ -1,6 +1,21 @@
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+// @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
+
+:root {
+    --app-main-color: #22c55e;
+    --app-light-color: #86ff8669;
+    --app-extra-light-color: #c7ffc638;
+}
+
+body {
+    font-size: 15px;
+    font-weight: 500 !important;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
 
 .material-symbols-rounded {
     font-variation-settings:
@@ -57,4 +72,86 @@
 
 .ant-form-item-label>label {
     width: 100%;
+}
+
+.ant-drawer .ant-drawer-content {
+    border-radius: 10px;
+    box-shadow: -6px 0 16px -8px rgba(0, 0, 0, .08), -9px 0 28px 0 rgba(0, 0, 0, .05), -12px 0 48px 16px rgba(0, 0, 0, .03);
+}
+
+.ant-drawer-right.ant-drawer-open .ant-drawer-content-wrapper {
+    box-shadow: none;
+    padding: 10px;
+}
+
+.button {
+    height: unset;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+
+    &.primary {
+        background: var(--app-main-color);
+        color: white;
+
+        &:hover {
+            background: var(--app-main-color);
+            color: white;
+        }
+    }
+
+    &.secondary {
+        background: var(--app-light-color);
+        color: var(--app-main-color);
+
+        &:hover {
+            background: var(--app-light-color);
+            color: var(--app-main-color);
+        }
+    }
+}
+
+.ant-drawer-footer,
+.ant-drawer-header {
+    background: var(--app-extra-light-color);
+    height: 80px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+
+    .ant-drawer-title {
+        font-size: 20px;
+        color: gray;
+    }
+}
+
+.ant-drawer-close {
+    background: var(--app-light-color);
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.product-drawer .ant-drawer-body {
+    padding: 0;
+}
+
+
+
+.notification-drawer .ant-drawer-body {
+    padding: 0;
+}
+
+.selected-language {
+    color: var(--app-main-color);
+    background-color: var(--app-light-color);
+}
+
+.drop-down-menu-item:hover {
+    color: var(--app-main-color);
+    cursor: pointer !important;
+    transition: all 0.2s;
 }

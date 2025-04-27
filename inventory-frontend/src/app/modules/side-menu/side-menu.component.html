@@ -1,0 +1,111 @@
+<div class="grid grid-cols-12 w-screen h-screen">
+  <aside class="bg-white h-screen col-span-2 overflow-auto flex flex-col justify-between rounded border-4">
+    <div class="flex flex-col justify-between">
+      <div class="flex justify-center items-center">
+        <h1 class="app-name mt-1">{{"app_name" | language }} </h1>
+      </div>
+      <ul class="pl-2">
+        <ng-container *ngFor="let item of sideMenu">
+          <ng-container *ngIf="item.children && item.children.length > 0">
+            <li>
+              <a class="parent-menu flex items-center justify-between" [id]="item.tagId" (click)="toggleMenu(menuItem)" #menuItem>
+                <div class="flex justify-start items-center">
+                  <span class="material-symbols-rounded mr-1 pr-3 ">{{item.icon}}</span>
+                  <span>{{item.name | language}}</span>
+                </div>
+                <span class="material-symbols-rounded mr-1">keyboard_arrow_down</span>
+              </a>
+              <ul class="hidden transition-all">
+                <li class="" *ngFor="let child of item.children" [routerLink]="child.path" routerLinkActive="active">
+                  <a class="!pl-12 flex items-center justify-between">
+                    <div class="flex justify-start items-center">
+                      <span class="material-symbols-rounded text-xs mr-3">line_start</span>
+                      <span *ngIf="child.icon" class="material-symbols-rounded mr-1 pr-3 ">{{child.icon}}</span>
+                      <span>{{child.name | language}}</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="!item.children">
+            <li [routerLink]="item.path" routerLinkActive="active">
+              <a class="flex items-center justify-between">
+                <div class="flex justify-start items-center">
+                  <span class="material-symbols-rounded mr-1 pr-3 ">{{item.icon}}</span>
+                  <span>{{item.name | language}}</span>
+                </div>
+              </a>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+    </div>
+
+    <div class="px-5 font-bold text-[15px] mb-5 cursor-pointer flex justify-start items-center text-red-400" (click)="logout()">
+      <span class="material-symbols-rounded mr-1 pr-3 font-bold">logout</span>
+      <span>Logout</span>
+    </div>
+  </aside>
+
+  <div class="col-span-10">
+    <div class="app-header !bg-white ">
+      <span class="header-trigger flex justify-between items-center">
+        <div class="flex items-center justify-start">
+          <!-- <span class="top-icon mr-3">
+            <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
+          </span> -->
+          <nz-input-group [nzPrefix]="prefixTemplateUser" class="top-search-input">
+            <input type="text" class="rounded-3xl" nz-input placeholder="Search" />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <span class="material-symbols-rounded">search</span>
+          </ng-template>
+        </div>
+        <div class="flex items-center justify-end">
+
+          <nz-select ngModel="Vampps Inv Store" nzPlaceHolder="Select Store" [nzCustomTemplate]="defaultTemplate" nzSize="large" nz-icon="appstore-add" class="store-select">
+            <nz-option nzValue="Vampps Inv Store" nzLabel="Vampps Inv Store"></nz-option>
+            <nz-option nzLabel="TirnelVeli Inv Store"></nz-option>
+          </nz-select>
+
+          <ng-template #defaultTemplate let-selected>
+            <div class="flex justify-start items-center">
+              <img src="assets/img/store.png" alt="Store" width="24" height="24" class="mr-2 rounded-full">
+              <span>{{ selected.nzLabel }}</span>
+            </div>
+          </ng-template>
+          <div class="relative inline-block cursor-pointer" (click)="notificationDrawer.open('Notifications')">
+            <button class="top-icon mr-3 relative bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium p-2 rounded-full shadow-md cursor-pointer">
+              <span class="material-symbols-rounded">notifications_active</span>
+              <span
+                class="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-nones    text-white bg-red-600 rounded-full">{{notificationDrawer?.data}}</span>
+            </button>
+          </div>
+          <div class="relative inline-block cursor-pointer" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+            <button class="top-icon mr-3 relative bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium p-2 rounded-full shadow-md cursor-pointer">
+              <span class="material-symbols-rounded">language</span>
+              <span
+                class="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-nones text-white bg-green-600 rounded-full">{{language.selectedLanguage}}</span>
+            </button>
+          </div>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu class="w-40">
+              <li nz-menu-item (click)="language.setLanguage(lang)" *ngFor="let lang of language.availableLanguages"
+                [class.selected-language]="language.selectedCountry == lang.country && language.selectedLanguage == lang.language">{{lang.name}}</li>
+            </ul>
+          </nz-dropdown-menu>
+          <span class="top-icon mr-3 shadow-md" (click)='profileDrawer.open("Sujith Vaithilingam Profile")'>
+            <span class="material-symbols-rounded">person</span>
+          </span>
+        </div>
+      </span>
+    </div>
+    <div class="inner-content px-4 py-3 bg-gray-100">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<app-notification-drawer (drawer)="notificationDrawer = $event"></app-notification-drawer>
+<app-profile-drawer (drawer)="profileDrawer = $event"></app-profile-drawer>
